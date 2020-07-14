@@ -10,7 +10,7 @@ import {BookService} from '../book.service';
 })
 export class BooksComponent implements OnInit {
   bookList: IBook[] = [];
-  bookForm: FormGroup;
+  postForm: FormGroup;
 
   constructor(private bookService: BookService,
               private formBuilder: FormBuilder) { }
@@ -24,20 +24,27 @@ export class BooksComponent implements OnInit {
     this.bookService.getBooks().subscribe(next => (this.bookList = next),
         error => (this.bookList = []));
   }
-  onSubmit() {
-    if (this.postForm.valid) {
-      const {value} = this.postForm;
-      this.bookService.createBook(value).subscribe(next => {
-        this.bookList.unshift(next);
-        this.postForm.reset({
-          title: '',
-          author: '',
-          description: ''
-        });
-      },
-        error => console.log(error));
-    }
+  // tslint:disable-next-line:typedef
+  // onSubmit() {
+  //   if (this.postForm.valid) {
+  //     const {value} = this.postForm;
+  //     this.bookService.createBook(value).subscribe(next => {
+  //       this.bookList.unshift(next);
+  //       this.postForm.reset({
+  //         title: '',
+  //         author: '',
+  //         description: ''
+  //       });
+  //     },
+  //       error => console.log(error));
+  //   }
+  // }
+  // tslint:disable-next-line:typedef
+  deleteBook(i) {
+    const book = this.bookList[i];
+    this.bookService.deleteBook(book.id).subscribe(() => {
+      this.bookList = this.bookList.filter(t => t.id !== book.id);
+    });
   }
-  deleteBook(i) {}
 
 }

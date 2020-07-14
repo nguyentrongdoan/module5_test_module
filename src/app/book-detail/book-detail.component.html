@@ -1,12 +1,15 @@
-<div *ngIf="post; else nothing">
+<div *ngIf="book; else nothing">
   <h4>
-    {{post.title}}
+    Title:
+    {{book.title}}
   </h4>
   <h4>
-    {{post.author}}
+    Author:
+    {{book.author}}
   </h4>
   <p>
-    {{post.description}}
+    Description:
+    {{book.description}}
   </p>
 </div>
 <ng-template #nothing>
