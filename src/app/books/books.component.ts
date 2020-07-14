@@ -25,20 +25,20 @@ export class BooksComponent implements OnInit {
         error => (this.bookList = []));
   }
   // tslint:disable-next-line:typedef
-  // onSubmit() {
-  //   if (this.postForm.valid) {
-  //     const {value} = this.postForm;
-  //     this.bookService.createBook(value).subscribe(next => {
-  //       this.bookList.unshift(next);
-  //       this.postForm.reset({
-  //         title: '',
-  //         author: '',
-  //         description: ''
-  //       });
-  //     },
-  //       error => console.log(error));
-  //   }
-  // }
+  onSubmit() {
+    if (this.postForm.valid) {
+      const {value} = this.postForm;
+      this.bookService.createBook(value).subscribe(next => {
+        this.bookList.unshift(next);
+        this.postForm.reset({
+          title: '',
+          author: '',
+          description: ''
+        });
+      },
+        error => console.log(error));
+    }
+  }
   // tslint:disable-next-line:typedef
   deleteBook(i) {
     const book = this.bookList[i];
